@@ -18,7 +18,7 @@ pipeline {
            //MYSQL_CREDS = credentials('MySQLCreds')
           }
       steps {
-        sh "oc login -u ${OPENSHIFT_CREDS_USR} -u ${OPENSHIFT_CREDS_PSW}"
+        sh "oc login -u ${OPENSHIFT_CREDS_USR} -p ${OPENSHIFT_CREDS_PSW}"
         sh "oc project ${projectName} || oc new-project ${projectName}"
         sh "oc delete all --selector app=${projectName} || echo 'Unable to delete all previous openshift resources'"
         sh "oc new-app ${dockerImageTag} -l version=${version}"
